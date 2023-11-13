@@ -1,0 +1,34 @@
+<form class="mb-1" (submit)="createTodo()" [formGroup]="todoForm">
+  <div class="d-flex flex-column flex-lg-row gap-2">
+    <div class="w-100">
+      <label for="title" class="form-label">Add a title</label>
+      <input
+        type="text"
+        class="form-control"
+        [class]="validField('title') ? 'bg-danger text-white' : ''"
+        id="title"
+        formControlName="title"
+      />
+      <div id="emailHelp" class="form-text text-danger" *ngIf="validField('title')">
+        title is require
+      </div>
+    </div>
+    <div class="w-100">
+      <label for="description" class="form-label">Add a description</label>
+      <input
+        type="text"
+        class="form-control"
+        [class]="validField('body') ? 'bg-danger text-white' : ''"
+        id="description"
+        formControlName="body"
+      />
+      <div id="emailHelp" class="form-text text-danger" *ngIf="validField('body')">
+        description is require
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2 d-flex justify-content-end">
+    <button class="btn btn-success" type="submit">Send</button>
+  </div>
+</form>

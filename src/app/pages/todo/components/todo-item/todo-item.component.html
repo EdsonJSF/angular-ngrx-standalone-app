@@ -1,0 +1,111 @@
+<section class="row">
+  <div class="col-12 d-flex justify-content-between">
+    <div class="">
+      <input
+        type="checkbox"
+        id="complete"
+        [checked]="todo.complete"
+        [formControl]="todoCheckForm"
+      />
+      <label for="complete" class="ms-2 form-label">{{
+        todo.complete ? "Completed" : "In proccess"
+      }}</label>
+    </div>
+    <div class="ms-auto">
+      <button
+        class="btn btn-warning me-2"
+        *ngIf="editMode"
+        (click)="editMode = false"
+      >
+        Disable Edit
+      </button>
+      <button
+        class="btn me-2"
+        [class]="editMode ? 'btn-success' : 'btn-info'"
+        (click)="activeEditMode()"
+      >
+        {{ editMode ? "Send" : "Edit" }}
+      </button>
+      <button
+        class="btn btn-danger me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDelete"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <form class="row" [formGroup]="todoForm">
+    <div class="col-12 col-lg-6">
+      <h3>Title</h3>
+      <p
+        [class]="todo.complete ? 'text-decoration-underline text-muted' : ''"
+        *ngIf="!editMode"
+      >
+        {{ todo.title }}
+      </p>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="title"
+        (keyup.enter)="editTodo()"
+        *ngIf="editMode"
+      />
+    </div>
+    <div class="col-12 col-lg-6">
+      <h4>Description</h4>
+      <p
+        [class]="todo.complete ? 'text-decoration-underline text-muted' : ''"
+        *ngIf="!editMode"
+      >
+        {{ todo.body }}
+      </p>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="body"
+        (keyup.enter)="editTodo()"
+        *ngIf="editMode"
+      />
+    </div>
+  </form>
+</section>
+
+<!-- Modal Delete -->
+<div
+  class="modal fade"
+  id="modalDelete"
+  tabindex="-1"
+  aria-labelledby="modalDeleteLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDeleteLabel">Delete Todo</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Pleace confirm</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="deleteTodo()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />

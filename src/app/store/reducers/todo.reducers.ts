@@ -16,8 +16,8 @@ export const todoReducer = createReducer(
   on(TodoAction.handleCreate, (state) => [...state]),
 
   on(TodoAction.create, (state, { title, body }) => [
-    ...state,
     new Todo(title, body),
+    ...state,
   ]),
 
   // Toggle

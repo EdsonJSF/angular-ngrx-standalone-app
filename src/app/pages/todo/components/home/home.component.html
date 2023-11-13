@@ -1,1 +1,16 @@
-<pre>{{ todos$ | async | json }}</pre>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="border rounded p-2 mb-2">
+        <h2>Create a Todo</h2>
+        <app-add-todo></app-add-todo>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="border rounded p-3 mb-2">
+        <app-todo-list></app-todo-list>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,28 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 
 // NgRx
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
 import { loadTodos } from 'src/app/store/actions/todo.actions';
-import { selectTodoList } from 'src/app/store/selectors/todo.selectors';
 
-import { Todo } from 'src/app/models/todo.model';
+import { AddTodoComponent } from '../add-todo/add-todo.component';
+import { TodoListComponent } from '../todo-list/todo-list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddTodoComponent, TodoListComponent],
   templateUrl: './home.component.html',
   styles: [],
 })
 export class HomeComponent {
   private store = inject(Store<AppState>);
-  todos$: Observable<Todo[]> = new Observable();
 
   ngOnInit(): void {
     this.store.dispatch(loadTodos());
-    this.todos$ = this.store.select(selectTodoList);
   }
 }
