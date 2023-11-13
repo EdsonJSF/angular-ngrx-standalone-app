@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 // NgRx
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
+import { loadTodos } from 'src/app/store/actions/todo.actions';
 import { selectTodoList } from 'src/app/store/selectors/todo.selectors';
 
 import { Todo } from 'src/app/models/todo.model';
@@ -21,6 +22,7 @@ export class HomeComponent {
   todos$: Observable<Todo[]> = new Observable();
 
   ngOnInit(): void {
+    this.store.dispatch(loadTodos());
     this.todos$ = this.store.select(selectTodoList);
   }
 }

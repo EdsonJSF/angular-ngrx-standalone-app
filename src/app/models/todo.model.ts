@@ -1,12 +1,12 @@
 export class Todo {
   public id: number;
   public title: string;
-  public description: string;
+  public body: string;
   public complete: boolean;
 
-  constructor(title: string, description: string) {
+  constructor(title: string, body: string) {
     this.title = title;
-    this.description = description;
+    this.body = body;
 
     this.id = new Date().getTime();
     this.complete = false;

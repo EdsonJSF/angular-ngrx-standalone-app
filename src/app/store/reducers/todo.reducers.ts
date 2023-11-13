@@ -7,10 +7,17 @@ export const initialState: Todo[] = [];
 export const todoReducer = createReducer(
   initialState,
 
+  // Load
+  on(TodoAction.loadTodos, (state) => {
+    return [...state];
+  }),
+
+  on(TodoAction.loadedTodos, (state, { todos }) => [...state, ...todos]),
+
   // Create
-  on(TodoAction.create, (state, { title, description }) => [
+  on(TodoAction.create, (state, { title, body }) => [
     ...state,
-    new Todo(title, description),
+    new Todo(title, body),
   ]),
 
   // Toggle
@@ -32,10 +39,10 @@ export const todoReducer = createReducer(
   }),
 
   // Edit
-  on(TodoAction.edit, (state, { id, title, description }) => {
+  on(TodoAction.edit, (state, { id, title, body }) => {
     return state.map((todo) => {
       if (todo.id === id) {
-        return { ...todo, title, description };
+        return { ...todo, title, body };
       } else {
         return todo;
       }
